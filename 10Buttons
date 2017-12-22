@@ -1,0 +1,114 @@
+#include <ESP8266WiFi.h>
+#include <WiFiClient.h> 
+#include <ESP8266WebServer.h>
+
+const char *ssid = "ESPap";
+const char *password = "12345678";
+
+ESP8266WebServer server(80);
+
+String webPage = "";
+
+int gpio0_pin = 0;
+int gpio2_pin = 2;
+int gpio3_pin = 3;
+int gpio4_pin = 4;
+int gpio5_pin = 5;
+
+void handleRoot() {
+server.send(200, "text/html", "<h1>You are connected</h1>");
+}
+
+void setup() {
+
+webPage += "<h1>ESP8266 Web Server</h1><font size=30><p>Socket #1 <a href=\"socket1On\"><button style=height:200px;width:200px;background-color:green;><font size=30>ON</button></a>&nbsp;<a href=\"socket1Off\"><button style=height:200px;width:200px;background-color:red;><font size=30>OFF</button></a></p>";
+webPage += "<p>Socket #2 <a href=\"socket2On\"><button style=height:200px;width:200px;background-color:green;><font size=30>ON</button></a>&nbsp;<a href=\"socket2Off\"><button style=height:200px;width:200px;background-color:red;><font size=30>OFF</button></a></p>";
+webPage += "<p>Socket #3 <a href=\"socket3On\"><button style=height:200px;width:200px;background-color:green;><font size=30>ON</button></a>&nbsp;<a href=\"socket3Off\"><button style=height:200px;width:200px;background-color:red;><font size=30>OFF</button></a></p>";
+webPage += "<p>Socket #4 <a href=\"socket4On\"><button style=height:200px;width:200px;background-color:green;><font size=30>ON</button></a>&nbsp;<a href=\"socket4Off\"><button style=height:200px;width:200px;background-color:red;><font size=30>OFF</button></a></p>";
+webPage += "<p>Socket #5 <a href=\"socket5On\"><button style=height:200px;width:200px;background-color:green;><font size=30>ON</button></a>&nbsp;<a href=\"socket5Off\"><button style=height:200px;width:200px;background-color:red;><font size=30>OFF</button></a></p>";
+
+// подготавливаем GPIO-контакты:
+pinMode(gpio0_pin, OUTPUT);
+digitalWrite(gpio0_pin, LOW);
+pinMode(gpio2_pin, OUTPUT);
+digitalWrite(gpio2_pin, LOW);
+
+delay(1000);
+Serial.begin(115200);
+Serial.println();
+Serial.print("Configuring access point...");
+/* You can remove the password parameter if you want the AP to be open. */
+WiFi.softAP(ssid, password);
+
+IPAddress myIP = WiFi.softAPIP();
+Serial.print("AP IP address: ");
+Serial.println(myIP);
+Serial.println(password);
+
+//server.on("/", handleRoot);
+//server.begin();
+
+server.on("/", [](){
+server.send(200, "text/html", webPage);
+});
+server.on("/socket1On", [](){
+server.send(200, "text/html", webPage);
+digitalWrite(gpio0_pin, LOW);
+delay(1000);
+});
+server.on("/socket1Off", [](){
+server.send(200, "text/html", webPage);
+digitalWrite(gpio0_pin, HIGH);
+delay(1000);
+});
+server.on("/socket2On", [](){
+server.send(200, "text/html", webPage);
+digitalWrite(gpio2_pin, LOW);
+delay(1000);
+});
+server.on("/socket2Off", [](){
+server.send(200, "text/html", webPage);
+digitalWrite(gpio2_pin, HIGH);
+delay(1000);
+});
+server.on("/socket3On", [](){
+server.send(200, "text/html", webPage);
+digitalWrite(gpio3_pin, LOW);
+delay(1000);
+});
+server.on("/socket3Off", [](){
+server.send(200, "text/html", webPage);
+digitalWrite(gpio3_pin, HIGH);
+delay(1000);
+});
+server.on("/socket4On", [](){
+server.send(200, "text/html", webPage);
+digitalWrite(gpio4_pin, LOW);
+delay(1000);
+});
+server.on("/socket4Off", [](){
+server.send(200, "text/html", webPage);
+digitalWrite(gpio4_pin, HIGH);
+delay(1000);
+});
+server.on("/socket5On", [](){
+server.send(200, "text/html", webPage);
+digitalWrite(gpio5_pin, LOW);
+delay(1000);
+});
+server.on("/socket5Off", [](){
+server.send(200, "text/html", webPage);
+digitalWrite(gpio5_pin, HIGH);
+delay(1000);
+});
+server.begin();
+
+Serial.println("HTTP server started");
+}
+
+void loop() {
+server.handleClient();
+}
+
+
+
