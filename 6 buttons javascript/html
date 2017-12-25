@@ -1,0 +1,61 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  
+  <script type="text/javascript">
+ 
+var countPress = 0;
+var colors = new Array('red','green');	
+ 
+function setBg(el) {
+	if ((background == "red") OR (background == "green")) then el.style.backgroundColor = "while";
+    
+}
+ 
+</script>
+  
+  
+  
+  <title>TABLE
+
+<style>
+   .b1 {
+    background: red;
+    color: white; 
+    font-size: 9pt; 
+   }
+.b2 {
+    background: green;  
+    color: white; 
+    font-size: 9pt; 
+   }
+  </style>
+  
+  
+  
+
+</title>
+ </head>
+ <body>
+  <table border="0" width="260" cellpadding="5" cols="0">
+   <tr>
+    <th>LED 1           <input type="button" id="but_1" name="but_1" value="On" onClick="return setBg(this)"><input type="button" id="but_1" name="but_1" value="Off" class="b1" onClick="return setBg(this)"></th>
+   </tr>
+    <tr>
+    <th>LED 2           <input type="button" id="but_1" name="but_1" value="On" onClick="return setBg(this)"><input type="button" id="but_1" name="but_1" value="Off"" class="b1" onClick="return setBg(this)"></th>
+   </tr> 
+<tr>
+    <th>LED 3           <input type="button" id="but_1" name="but_1" value="On" onClick="return setBg(this); return setBg(but_3F)"><input type="button" id="but_3F" name="but_1" value="Off"" class="b1" onClick="return setBg(this)"></th>
+   </tr>
+<tr>
+    <th>LED 4           <input type="button" id="but_1" name="but_1" value="On" onClick="return setBg(this)"><input type="button" id="but_1" name="but_1" value="Off"" class="b1" onClick="return setBg(this)"></th>
+   </tr>
+<tr>
+    <th>LED 5           <input type="button" id="but_1" name="but_1" value="On" onClick="return setBg(this)"><input type="button" id="but_1" name="but_1" value="Off"" class="b1" onClick="return setBg(this)"></th>
+   </tr>
+<tr>
+    <th>LED 6           <input type="button" id="but_1" name="but_1" value="On" onClick="return setBg(this)"><input type="button" id="but_1" name="but_1" value="Off"" class="b1" onClick="return setBg(this)"></th>
+   </tr>
+ </table>
+ </body>
+</html>
